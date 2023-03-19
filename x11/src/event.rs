@@ -1,0 +1,83 @@
+use std::io;
+
+#[derive(Debug)]
+pub enum Event {
+    KeyPress,
+    KeyRelease,
+    ButtonPress,
+    ButtonRelease,
+    MotionNotify,
+    EnterNotify,
+    LeaveNotify,
+    FocusIn,
+    FocusOut,
+    KeymapNotify,
+    Expose,
+    GraphicsExposure,
+    NoExposure,
+    VisibilityNotify,
+    CreateNotify,
+    DestroyNotify,
+    UnmapNotify,
+    MapNotify,
+    MapRequest,
+    ReparentNotify,
+    ConfigureNotify,
+    ConfigureRequest,
+    GravityNotify,
+    ResizeRequest,
+    CirculateNotify,
+    CirculateRequest,
+    PropertyNotify,
+    SelectionClear,
+    SelectionRequest,
+    SelectionNotify,
+    ColormapNotify,
+    ClientMessage,
+    MappingNotify,
+    Unknown(u8),
+}
+
+impl Event {
+    pub fn read<T: io::Read>(r: &mut T) -> anyhow::Result<Self> {
+        use byteorder::ReadBytesExt;
+
+        Ok(match r.read_u8()? {
+            2 => Event::KeyPress,
+            3 => Event::KeyRelease,
+            4 => Event::ButtonPress,
+            5 => Event::ButtonRelease,
+            6 => Event::MotionNotify,
+            7 => Event::EnterNotify,
+            8 => Event::LeaveNotify,
+            9 => Event::FocusIn,
+            10 => Event::FocusOut,
+            11 => Event::KeymapNotify,
+            12 => Event::Expose,
+            13 => Event::GraphicsExposure,
+            14 => Event::NoExposure,
+            15 => Event::VisibilityNotify,
+            16 => Event::CreateNotify,
+            17 => Event::DestroyNotify,
+            18 => Event::UnmapNotify,
+            19 => Event::MapNotify,
+            20 => Event::MapRequest,
+            21 => Event::ReparentNotify,
+            22 => Event::ConfigureNotify,
+            23 => Event::ConfigureRequest,
+            24 => Event::GravityNotify,
+            25 => Event::ResizeRequest,
+            26 => Event::CirculateNotify,
+            27 => Event::CirculateRequest,
+            28 => Event::PropertyNotify,
+            29 => Event::SelectionClear,
+            30 => Event::SelectionRequest,
+            31 => Event::SelectionNotify,
+            32 => Event::ColormapNotify,
+            33 => Event::ClientMessage,
+            34 => Event::MappingNotify,
+
+            code => Event::Unknown(code),
+        })
+    }
+}

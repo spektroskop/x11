@@ -1,0 +1,12 @@
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+x11 = { path = "../x11" }
+anyhow = "1.0.56"
+byteorder = "1.4.3"
+tokio = { version = "1.18.1", features = [
+    "rt", "rt-multi-thread", "io-util", "net", "macros", "sync",
+] }

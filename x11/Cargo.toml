@@ -1,0 +1,12 @@
+[package]
+name = "x11"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+thiserror = "1.0"
+anyhow = "1.0.56"
+byteorder = "1.4.3"
+tokio = { version = "1.18.1", features = [
+    "rt", "rt-multi-thread", "io-util", "net", "macros", "sync",
+] }

@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "x11",
+    "client",
+]
+
